@@ -3,11 +3,13 @@
 :root {
 	font-size: 8px;
 
+	--text-color: #ddd;
 	--background: #222;
 
 	--std-height: 6rem;
 	--std-transition-time: 250ms;
 
+	--disabled-color: #666;
 	--primary-color: #7a72ef;
 	--secondary-color: #531b53;
 }
