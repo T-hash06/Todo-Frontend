@@ -6,13 +6,13 @@
 <div id="login-page" class="page-container">
 	<form class="form">
 		<div class="section">
-			<TextInput placeholder="username" name="username" />
-			<TextInput placeholder="password" name="password" />
+			<TextInput placeholder="Username" name="username" icon="solar:user-bold" />
+			<TextInput placeholder="Password" name="password" icon="solar:key-bold" />
 		</div>
 
-		<div class="section">
-			<Button>Login</Button>
+		<div class="buttons-section section">
 			<Button type="secondary" href="register">Sign Up</Button>
+			<Button>Login</Button>
 		</div>
 	</form>
 </div>
@@ -42,6 +42,10 @@
 				align-items: center;
 
 				gap: 3rem;
+			}
+
+			.buttons-section {
+				flex-direction: row;
 			}
 		}
 	}
