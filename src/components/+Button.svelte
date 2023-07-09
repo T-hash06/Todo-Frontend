@@ -1,9 +1,12 @@
 <script lang="ts">
+	let classes: string = '';
+	export { classes as class };
+
 	export let type: 'primary' | 'secondary' = 'primary';
 	export let href: string = '';
 </script>
 
-<button class="button-container {type}">
+<button class="button-container {type} {classes}">
 	<svelte:element this={href !== '' ? 'a' : 'span'} class="text" {href}><slot /></svelte:element>
 </button>
 

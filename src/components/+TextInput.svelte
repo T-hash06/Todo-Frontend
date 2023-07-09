@@ -1,4 +1,7 @@
 <script lang="ts">
+	let classes: string = '';
+	export { classes as class };
+
 	export let placeholder: string = '';
 	export let value: string = '';
 	export let name: string;
@@ -8,12 +11,14 @@
 	$: filled = value !== '';
 </script>
 
-<div id="input-{name}" class="text-input-container" class:filled {placeholder}>
+<div id="input-{name}" class="text-input-container {classes}" class:filled {placeholder}>
 	<input class="input" type="text" bind:value {name} />
 </div>
 
 <style lang="scss">
 	.text-input-container {
+		--border-slice-color: var(--background);
+
 		position: relative;
 
 		height: var(--std-height);
@@ -76,7 +81,8 @@
 			padding: 0 2rem;
 
 			color: transparent;
-			background-color: var(--background);
+			background: var(--border-slice-color);
+			background-attachment: fixed;
 
 			transform: scaleX(0);
 			transition-duration: inherit;
