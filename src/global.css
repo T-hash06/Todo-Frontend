@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+
+:root {
+	font-size: 8px;
+
+	--background: #222;
+
+	--std-height: 6rem;
+	--std-transition-time: 250ms;
+
+	--primary-color: #7a72ef;
+	--secondary-color: #531b53;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Outfit', 'Poppins', sans-serif;
+}
+
+body {
+	background: var(--background);
+
+	height: 100vh;
+	height: 100svh;
+}
+
+.page-container {
+	height: 100%;
+}
