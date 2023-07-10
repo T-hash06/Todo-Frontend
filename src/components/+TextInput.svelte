@@ -5,6 +5,7 @@
 	export { classes as class };
 
 	export let placeholder: string = '';
+	export let type: 'text' | 'password' = 'text';
 	export let value: string = '';
 	export let icon: string = '';
 	export let name: string;
@@ -12,6 +13,10 @@
 	let filled: boolean = value !== '';
 
 	$: filled = value !== '';
+
+	function setType(node: HTMLInputElement) {
+		node.type = type;
+	}
 </script>
 
 <div
@@ -26,7 +31,7 @@
 			<Icon {icon} />
 		</span>
 	{/if}
-	<input class="input" type="text" bind:value {name} />
+	<input class="input" use:setType bind:value {name} />
 </div>
 
 <style lang="scss">
