@@ -3,12 +3,14 @@
 </script>
 
 <div id="auth-layout" class="page-container">
-	<div class="titles-container">
-		<h1 class="title">{data.title}</h1>
-		<h2 class="sub-title">{data.sub}</h2>
-	</div>
-	<div class="slot-container">
-		<slot />
+	<div class="flex-wrapper">
+		<div class="titles-container">
+			<h1 class="title">{data.title}</h1>
+			<h2 class="sub-title">{data.sub}</h2>
+		</div>
+		<div class="slot-container">
+			<slot />
+		</div>
 	</div>
 </div>
 
@@ -16,12 +18,22 @@
 	$padding: 4rem;
 
 	#auth-layout {
-		padding: $padding;
-		display: grid;
+		display: flex;
+		justify-content: center;
 
-		grid-auto-rows: min-content;
+		overflow: auto;
 
-		gap: 8rem;
+		.flex-wrapper {
+			padding: $padding;
+			display: grid;
+
+			grid-auto-rows: min-content;
+
+			width: 100%;
+			max-width: 480px;
+
+			gap: 8rem;
+		}
 
 		.titles-container {
 			justify-self: left;
@@ -34,7 +46,7 @@
 
 			gap: 1rem;
 
-			margin-top: 4rem;
+			margin-top: 2rem;
 			.title {
 				font-size: 6rem;
 				font-weight: 500;
@@ -70,7 +82,26 @@
 				justify-content: center;
 				align-items: center;
 
-				gap: 3rem;
+				gap: 4rem;
+			}
+		}
+	}
+
+	@media screen and (min-width: 580px) {
+		#auth-layout {
+			display: grid;
+			place-items: center;
+
+			.flex-wrapper {
+				height: min-content;
+				margin: 8rem 0;
+
+				min-width: 480px;
+
+				box-shadow: 0px 0px 1.5rem var(--shadow-color);
+				background-color: var(--background);
+
+				border-radius: 2rem;
 			}
 		}
 	}

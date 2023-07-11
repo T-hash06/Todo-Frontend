@@ -12,6 +12,7 @@
 	--disabled-color: #666;
 	--primary-color: #7a72ef;
 	--secondary-color: #531b53;
+	--shadow-color: #0000004d;
 }
 
 * {
@@ -30,4 +31,12 @@ body {
 
 .page-container {
 	height: 100%;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	transition: background-color 99999s ease-in-out 0s;
+	-webkit-text-fill-color: var(--text-color) !important;
 }

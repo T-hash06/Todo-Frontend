@@ -25,7 +25,7 @@
 		justify-content: center;
 		align-items: center;
 
-		.buttons-section {
+		.section.buttons-section {
 			flex-direction: row;
 		}
 	}
