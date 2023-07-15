@@ -1,12 +1,42 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
+	import { HttpRequest } from '$lib/http';
+
 	import Button from '$components/+Button.svelte';
 	import TextInput from '$components/+TextInput.svelte';
 
-	import { fade } from 'svelte/transition';
+	function submit(event: SubmitEvent) {
+		const formData = new FormData(event.target as HTMLFormElement);
+		const data = Object.fromEntries(formData);
+
+		const request = new HttpRequest();
+
+		request.setEndpoint('http://localhost:3000/auth').setMethod('POST').setBody(data);
+
+		request.addResponse(null, (error) => {
+			alert('error');
+			console.log(error);
+		});
+
+		request.addResponse(404, (_) => {
+			alert('user not found');
+		});
+
+		request.addResponse(401, (_) => {
+			alert('incorrect password');
+		});
+
+		request.addResponse<string>(201, (text) => {
+			alert('success');
+			console.log(text);
+		});
+
+		request.execute();
+	}
 </script>
 
 <div id="login-page" in:fade={{ duration: 600 }}>
-	<form class="form">
+	<form class="form" on:submit|preventDefault={submit}>
 		<div class="section">
 			<TextInput placeholder="Username" name="username" icon="solar:user-bold" />
 			<TextInput placeholder="Password" name="password" type="password" icon="solar:key-bold" />
