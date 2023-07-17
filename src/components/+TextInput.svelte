@@ -89,7 +89,6 @@
 </script>
 
 <div
-	id="input-{name}"
 	class="text-input-container {classes}"
 	class:filled
 	class:iconned={icon}
@@ -102,7 +101,9 @@
 			<Icon {icon} />
 		</span>
 	{/if}
+	<label class="label" for="input-{name}">{name}</label>
 	<input
+		id="input-{name}"
 		class="input"
 		use:setType
 		bind:value
@@ -117,7 +118,13 @@
 		<sub class="message">{validMessage}</sub>
 	{/key}
 
-	<button class="password-icon" class:showing on:mousedown={switchVisible} type="button">
+	<button
+		class="password-icon"
+		class:showing
+		on:mousedown={switchVisible}
+		type="button"
+		aria-label="switch hidden password"
+	>
 		<Icon icon="ri:eye-fill" />
 	</button>
 </div>
@@ -149,6 +156,14 @@
 			font-size: 3rem;
 
 			transition-property: inherit;
+		}
+
+		.label {
+			position: absolute;
+			color: transparent;
+
+			height: 100%;
+			width: 6rem;
 		}
 
 		.input {

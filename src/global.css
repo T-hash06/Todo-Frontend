@@ -5,6 +5,7 @@
 
 	--text-color: #ddd;
 	--background: #222;
+	/* --background: #1a1a1a; */
 
 	--std-height: 6rem;
 	--std-transition-time: 250ms;
@@ -12,6 +13,7 @@
 	--disabled-color: #666;
 	--primary-color: #7a72ef;
 	--secondary-color: #531b53;
+	/* --secondary-color: #2b0d2b; */
 	--error-color: #f08080;
 	--shadow-color: #0000004d;
 }

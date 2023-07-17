@@ -39,6 +39,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Login | Todo App</title>
+</svelte:head>
+
 <div id="login-page" in:fade={{ duration: 600 }}>
 	<form class="form" method="post" on:submit|preventDefault={submit}>
 		<div class="section">
