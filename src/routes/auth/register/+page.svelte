@@ -51,7 +51,13 @@
 			<TextInput placeholder="Name" name="name" icon="solar:user-bold" />
 			<TextInput placeholder="Email" name="email" type="email" icon="solar:letter-bold" />
 			<TextInput placeholder="Username" name="username" icon="solar:user-id-bold" />
-			<TextInput placeholder="Password" name="password" type="password" icon="solar:key-bold" />
+			<TextInput
+				placeholder="Password"
+				name="password"
+				type="password"
+				icon="solar:key-bold"
+				minlength={8}
+			/>
 		</div>
 		<div class="section buttons-section">
 			<Button href="login" type="secondary">Login</Button>

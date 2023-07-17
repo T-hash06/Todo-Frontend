@@ -10,12 +10,16 @@
 	export let type: 'text' | 'password' | 'email' = 'text';
 	export let value: string = '';
 	export let icon: string = '';
+	export let pattern: string | null = null;
+	export let minlength: number | null = null;
 	export let name: string;
 
 	export let optional: boolean = false;
 
 	let filled: boolean = value !== '';
+	let showing: boolean = false;
 	let validMessage: string = '';
+	let inputElement: HTMLInputElement | null;
 
 	const context = getErrorContext();
 
@@ -28,6 +32,8 @@
 
 	function setType(node: HTMLInputElement) {
 		node.type = type;
+
+		inputElement = node;
 	}
 
 	function checkValidity(event: Event) {
@@ -36,6 +42,11 @@
 
 		if (isValid) {
 			validMessage = '';
+			return;
+		}
+
+		if (target.validity.tooShort) {
+			validMessage = `Must be at least ${minlength} characters long`;
 			return;
 		}
 
@@ -51,7 +62,29 @@
 			return;
 		}
 
+		if (target.validity.tooShort) {
+			validMessage = `Must be at least ${minlength} characters long`;
+			return;
+		}
+
 		validMessage = target.validationMessage;
+	}
+
+	function switchVisible(event: Event) {
+		event.preventDefault();
+
+		if (inputElement === null) {
+			return;
+		}
+
+		showing = !showing;
+
+		if (inputElement.type === 'password') {
+			inputElement.type = 'text';
+			return;
+		}
+
+		inputElement.type = 'password';
 	}
 </script>
 
@@ -60,6 +93,7 @@
 	class="text-input-container {classes}"
 	class:filled
 	class:iconned={icon}
+	class:password={type === 'password'}
 	class:error={validMessage}
 	{placeholder}
 >
@@ -76,10 +110,16 @@
 		on:invalid={invalid}
 		required={!optional}
 		{name}
+		{pattern}
+		{minlength}
 	/>
 	{#key validMessage}
-		<span class="message">{validMessage}</span>
+		<sub class="message">{validMessage}</sub>
 	{/key}
+
+	<button class="password-icon" class:showing on:mousedown={switchVisible} type="button">
+		<Icon icon="ri:eye-fill" />
+	</button>
 </div>
 
 <style lang="scss">
@@ -127,6 +167,26 @@
 
 			font-size: 2rem;
 			z-index: 1;
+		}
+
+		.password-icon {
+			display: none;
+			position: absolute;
+
+			color: var(--disabled-color);
+			font-size: 3.5rem;
+
+			right: 0;
+			padding-right: 2rem;
+
+			height: 100%;
+			align-items: center;
+
+			background-color: transparent;
+			border: none;
+			outline: none;
+
+			transition-duration: inherit;
 		}
 
 		.message {
@@ -202,6 +262,33 @@
 			}
 		}
 
+		&.password {
+			.password-icon {
+				display: flex;
+				cursor: pointer;
+				z-index: 4;
+
+				&::after {
+					position: absolute;
+					content: '';
+
+					width: 4rem;
+					height: 4px;
+
+					left: -0.2rem;
+
+					background-color: var(--disabled-color);
+
+					transform: rotate(-30deg) scaleX(0);
+					transition-duration: inherit;
+				}
+
+				&.showing::after {
+					transform: rotate(-30deg) scaleX(1);
+				}
+			}
+		}
+
 		&.error {
 			border-color: var(--error-color);
 
@@ -214,7 +301,12 @@
 		&:focus-within {
 			border-color: var(--primary-color);
 
+			.password-icon::after {
+				background-color: var(--primary-color);
+			}
+
 			&::after,
+			.password-icon,
 			.icon {
 				color: var(--primary-color);
 			}
