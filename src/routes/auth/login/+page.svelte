@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
+	import { goto } from '$app/navigation';
 
 	import { createFormContext } from '$lib/contexts/FormErrors';
 	import { HttpRequest } from '$lib/http';
@@ -31,8 +32,8 @@
 		});
 
 		request.addResponse<string>(201, (text) => {
-			alert('success');
-			console.log(text);
+			document.cookie = `session-token=${text};path=/home`;
+			goto('/home');
 		});
 
 		request.execute();

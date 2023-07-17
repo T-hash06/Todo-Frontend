@@ -11,12 +11,19 @@ export type HttpResponse<T> = {
 
 export type ResponseFallback<T> = (payload: T) => void;
 
+export type SessionPayload = {
+	username: string;
+	iat: number;
+	exp: number;
+};
+
 export class HttpRequest {
 	private method: HttpMethod = 'GET';
 	private endpoint = '';
 	private resource = '';
+	private headers = {} as Record<string, string>;
 
-	private body = {} as unknown;
+	private body: unknown = undefined;
 	private hasDefaultFallback = false;
 
 	private cases = {} as Record<HttpCode, ResponseFallback<unknown>>;
@@ -38,6 +45,16 @@ export class HttpRequest {
 
 	public setBody(body: unknown): HttpRequest {
 		this.body = body;
+		return this;
+	}
+
+	public setHeader(key: string, value: string): HttpRequest {
+		this.headers[key] = value;
+		return this;
+	}
+
+	public setBearer(bearer: string): HttpRequest {
+		this.setHeader('Authorization', `Bearer ${bearer}`);
 		return this;
 	}
 
@@ -63,7 +80,8 @@ export class HttpRequest {
 				body: JSON.stringify(this.body),
 				headers: {
 					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*'
+					'Access-Control-Allow-Origin': '*',
+					...this.headers
 				}
 			});
 
