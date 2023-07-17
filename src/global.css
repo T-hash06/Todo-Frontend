@@ -12,6 +12,7 @@
 	--disabled-color: #666;
 	--primary-color: #7a72ef;
 	--secondary-color: #531b53;
+	--error-color: #f08080;
 	--shadow-color: #0000004d;
 }
 
@@ -39,4 +40,22 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
 	transition: background-color 99999s ease-in-out 0s;
 	-webkit-text-fill-color: var(--text-color) !important;
+}
+
+@keyframes shake-x {
+	0% {
+		transform: translateX(0);
+	}
+	25% {
+		transform: translateX(-0.5rem);
+	}
+	50% {
+		transform: translateX(0.5rem);
+	}
+	75% {
+		transform: translateX(-0.5rem);
+	}
+	100% {
+		transform: translateX(0);
+	}
 }

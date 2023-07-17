@@ -1,21 +1,57 @@
 <script lang="ts">
+	import { getErrorContext } from '$lib/contexts/FormErrors';
+	import { hasContext } from 'svelte';
 	import Icon from '@iconify/svelte';
 
 	let classes: string = '';
 	export { classes as class };
 
 	export let placeholder: string = '';
-	export let type: 'text' | 'password' = 'text';
+	export let type: 'text' | 'password' | 'email' = 'text';
 	export let value: string = '';
 	export let icon: string = '';
 	export let name: string;
 
+	export let optional: boolean = false;
+
 	let filled: boolean = value !== '';
+	let validMessage: string = '';
+
+	const context = getErrorContext();
 
 	$: filled = value !== '';
+	$: {
+		if (hasContext('form-errors')) {
+			validMessage = $context[name];
+		}
+	}
 
 	function setType(node: HTMLInputElement) {
 		node.type = type;
+	}
+
+	function checkValidity(event: Event) {
+		const target = event.target as HTMLInputElement;
+		const isValid = target.validity.valid;
+
+		if (isValid) {
+			validMessage = '';
+			return;
+		}
+
+		validMessage = target.validationMessage;
+	}
+
+	function invalid(event: Event) {
+		event.preventDefault();
+
+		const target = event.target as HTMLInputElement;
+
+		if (target.validity.valid) {
+			return;
+		}
+
+		validMessage = target.validationMessage;
 	}
 </script>
 
@@ -24,6 +60,7 @@
 	class="text-input-container {classes}"
 	class:filled
 	class:iconned={icon}
+	class:error={validMessage}
 	{placeholder}
 >
 	{#if icon}
@@ -31,7 +68,18 @@
 			<Icon {icon} />
 		</span>
 	{/if}
-	<input class="input" use:setType bind:value {name} />
+	<input
+		class="input"
+		use:setType
+		bind:value
+		on:change={checkValidity}
+		on:invalid={invalid}
+		required={!optional}
+		{name}
+	/>
+	{#key validMessage}
+		<span class="message">{validMessage}</span>
+	{/key}
 </div>
 
 <style lang="scss">
@@ -79,6 +127,24 @@
 
 			font-size: 2rem;
 			z-index: 1;
+		}
+
+		.message {
+			position: absolute;
+			bottom: -2.5rem;
+			left: 2rem;
+
+			height: 2rem;
+			width: calc(100% - 4rem);
+
+			font-size: 1.5rem;
+			color: var(--error-color);
+
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+
+			animation: var(--std-transition-time) shake-x;
 		}
 
 		&::after {
@@ -129,6 +195,15 @@
 
 			&::after {
 				left: 6rem;
+			}
+		}
+
+		&.error {
+			border-color: var(--error-color);
+
+			.icon,
+			&::after {
+				color: var(--error-color);
 			}
 		}
 

@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
+
 	import { HttpRequest } from '$lib/http';
+	import { createFormContext } from '$lib/contexts/FormErrors';
 
 	import Button from '$components/+Button.svelte';
 	import TextInput from '$components/+TextInput.svelte';
+
+	const { setError } = createFormContext({ username: '', password: '' });
 
 	function submit(event: SubmitEvent) {
 		const formData = new FormData(event.target as HTMLFormElement);
@@ -19,11 +23,11 @@
 		});
 
 		request.addResponse(404, (_) => {
-			alert('user not found');
+			setError('username', 'Username not found');
 		});
 
 		request.addResponse(401, (_) => {
-			alert('incorrect password');
+			setError('password', 'Incorrect password');
 		});
 
 		request.addResponse<string>(201, (text) => {
