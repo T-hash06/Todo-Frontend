@@ -145,6 +145,10 @@
 			overflow: hidden;
 
 			animation: var(--std-transition-time) shake-x;
+
+			&::first-letter {
+				text-transform: uppercase;
+			}
 		}
 
 		&::after {

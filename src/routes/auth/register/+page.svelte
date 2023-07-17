@@ -1,15 +1,52 @@
 <script lang="ts">
-	import Button from '$components/+Button.svelte';
-	import TextInput from '$components/+TextInput.svelte';
-	import { createFormContext } from '$lib/contexts/FormErrors';
+	type formData = {
+		name: string;
+		email: string;
+		username: string;
+		password: string;
+	};
 
 	import { fade } from 'svelte/transition';
 
+	import { createFormContext } from '$lib/contexts/FormErrors';
+	import { HttpRequest } from '$lib/http';
+	import { goto } from '$app/navigation';
+
+	import Button from '$components/+Button.svelte';
+	import TextInput from '$components/+TextInput.svelte';
+
 	const { setError } = createFormContext({ name: '', email: '', username: '', password: '' });
+
+	function submit(event: SubmitEvent) {
+		const formData = new FormData(event.target as HTMLFormElement);
+		const data = Object.fromEntries(formData);
+
+		const request = new HttpRequest();
+
+		request.setResource('user').setMethod('POST').setBody(data);
+
+		request.addResponse(null, (error) => {
+			alert('error');
+			console.log(error);
+		});
+
+		request.addResponse<Array<keyof formData>>(409, (errors) => {
+			errors.forEach((error) => {
+				setError(error, `${error} already exists`);
+			});
+		});
+
+		request.addResponse(201, (_) => {
+			alert('success');
+			goto('/auth/login');
+		});
+
+		request.execute();
+	}
 </script>
 
 <div id="register-page" in:fade={{ duration: 600 }}>
-	<form class="form">
+	<form class="form" method="post" on:submit|preventDefault={submit}>
 		<div class="section">
 			<TextInput placeholder="Name" name="name" icon="solar:user-bold" />
 			<TextInput placeholder="Email" name="email" type="email" icon="solar:letter-bold" />

@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 
-	import { HttpRequest } from '$lib/http';
 	import { createFormContext } from '$lib/contexts/FormErrors';
+	import { HttpRequest } from '$lib/http';
 
 	import Button from '$components/+Button.svelte';
 	import TextInput from '$components/+TextInput.svelte';
@@ -15,7 +15,7 @@
 
 		const request = new HttpRequest();
 
-		request.setEndpoint('http://localhost:3000/auth').setMethod('POST').setBody(data);
+		request.setResource('auth').setMethod('POST').setBody(data);
 
 		request.addResponse(null, (error) => {
 			alert('error');
@@ -40,7 +40,7 @@
 </script>
 
 <div id="login-page" in:fade={{ duration: 600 }}>
-	<form class="form" on:submit|preventDefault={submit}>
+	<form class="form" method="post" on:submit|preventDefault={submit}>
 		<div class="section">
 			<TextInput placeholder="Username" name="username" icon="solar:user-bold" />
 			<TextInput placeholder="Password" name="password" type="password" icon="solar:key-bold" />

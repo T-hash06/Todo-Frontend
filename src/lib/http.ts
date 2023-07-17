@@ -1,5 +1,7 @@
 import type { HttpMethod } from '@sveltejs/kit';
 
+import { PUBLIC_BACKEND_ENDPOINT } from '$env/static/public';
+
 export type HttpCode = -1 | 200 | 201 | 204 | 400 | 401 | 403 | 404 | 409 | 500;
 
 export type HttpResponse<T> = {
@@ -10,8 +12,9 @@ export type HttpResponse<T> = {
 export type ResponseFallback<T> = (payload: T) => void;
 
 export class HttpRequest {
-	private endpoint?: string;
 	private method: HttpMethod = 'GET';
+	private endpoint = '';
+	private resource = '';
 
 	private body = {} as unknown;
 	private hasDefaultFallback = false;
@@ -20,6 +23,11 @@ export class HttpRequest {
 
 	public setEndpoint(endpoint: string): HttpRequest {
 		this.endpoint = endpoint;
+		return this;
+	}
+
+	public setResource(resource: string): HttpRequest {
+		this.resource = resource;
 		return this;
 	}
 
@@ -45,11 +53,12 @@ export class HttpRequest {
 	}
 
 	public async execute(): Promise<void> {
-		if (this.endpoint === undefined) throw new Error('Endpoint is not defined');
 		if (this.hasDefaultFallback === false) throw new Error('Default fallback is not defined');
 
+		if (this.endpoint === '') this.endpoint = PUBLIC_BACKEND_ENDPOINT;
+
 		try {
-			const response = await fetch(this.endpoint, {
+			const response = await fetch(`${this.endpoint}/${this.resource}`, {
 				method: this.method,
 				body: JSON.stringify(this.body),
 				headers: {
