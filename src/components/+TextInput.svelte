@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { getErrorContext } from '$lib/contexts/FormErrors';
 	import { hasContext } from 'svelte';
-	import Icon from '@iconify/svelte';
 
 	let classes: string = '';
 	export { classes as class };
@@ -98,7 +97,7 @@
 >
 	{#if icon}
 		<span class="icon">
-			<Icon {icon} />
+			<iconify-icon {icon} />
 		</span>
 	{/if}
 	<label class="label" for="input-{name}">{name}</label>
@@ -125,7 +124,7 @@
 		type="button"
 		aria-label="switch hidden password"
 	>
-		<Icon icon="ri:eye-fill" />
+		<iconify-icon icon="ri:eye-fill" />
 	</button>
 </div>
 

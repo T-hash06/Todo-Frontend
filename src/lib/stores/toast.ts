@@ -3,9 +3,9 @@ import { writable } from 'svelte/store';
 let timeoutId = 0;
 
 export const toastStore = writable<ToastData>({
-	message: 'Hola mundo como estan todos',
-	title: 'Usuario creado',
-	status: 'error',
+	message: '',
+	title: '',
+	status: 'success',
 	active: false
 });
 

@@ -26,6 +26,8 @@
 	padding: 0;
 	box-sizing: border-box;
 	font-family: 'Outfit', 'Poppins', sans-serif;
+
+	-webkit-tap-highlight-color: transparent;
 }
 
 body {

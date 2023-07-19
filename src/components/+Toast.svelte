@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { toastStore, hideToast } from '$lib/stores/toast';
 
-	import Icon from '@iconify/svelte';
-
 	let icon = 'solar:check-square-bold';
 
 	$: {
@@ -23,7 +21,7 @@
 <div id="toast-container" class:active={$toastStore.active} class={$toastStore.status}>
 	<button class="wrapper" on:click={hideToast}>
 		<span class="icon">
-			<Icon {icon} />
+			<iconify-icon {icon} />
 		</span>
 		<h2 class="title">{$toastStore.title}</h2>
 		<p class="text">{$toastStore.message}</p>
@@ -94,7 +92,6 @@
 			opacity: 0;
 
 			cursor: pointer;
-			-webkit-tap-highlight-color: transparent;
 
 			.icon {
 				position: relative;
