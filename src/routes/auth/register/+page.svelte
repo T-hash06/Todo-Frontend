@@ -10,7 +10,7 @@
 
 	import { createFormContext } from '$lib/contexts/FormErrors';
 	import { showToast } from '$lib/stores/toast';
-	import { HttpRequest } from '$lib/http';
+	import { HttpRequest } from '$lib/util/http';
 	import { goto } from '$app/navigation';
 
 	import Button from '$components/+Button.svelte';

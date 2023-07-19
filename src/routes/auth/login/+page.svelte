@@ -4,7 +4,7 @@
 
 	import { createFormContext } from '$lib/contexts/FormErrors';
 	import { showToast } from '$lib/stores/toast';
-	import { HttpRequest } from '$lib/http';
+	import { HttpRequest } from '$lib/util/http';
 
 	import Button from '$components/+Button.svelte';
 	import TextInput from '$components/+TextInput.svelte';
