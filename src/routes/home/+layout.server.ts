@@ -26,7 +26,6 @@ export async function load({ cookies }) {
 	});
 
 	request.addResponse<SessionPayload>(200, (payload) => {
-		console.log('User is logged in');
 		session = payload;
 	});
 

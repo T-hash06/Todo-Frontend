@@ -3,6 +3,7 @@
 	import { goto } from '$app/navigation';
 
 	import { createFormContext } from '$lib/contexts/FormErrors';
+	import { showToast } from '$lib/stores/toast';
 	import { HttpRequest } from '$lib/http';
 
 	import Button from '$components/+Button.svelte';
@@ -19,7 +20,7 @@
 		request.setResource('auth').setMethod('POST').setBody(data);
 
 		request.addResponse(null, (error) => {
-			alert('error');
+			showToast('error', 'Server Error', 'A server error has occurred. Please try again later.');
 			console.log(error);
 		});
 
@@ -33,6 +34,7 @@
 
 		request.addResponse<string>(201, (text) => {
 			document.cookie = `session-token=${text};path=/home`;
+			showToast('success', 'Logged in', 'Logged in successfully!');
 			goto('/home');
 		});
 

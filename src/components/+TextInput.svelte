@@ -171,7 +171,7 @@
 			width: 100%;
 
 			background-color: transparent;
-			color: var(--text-color);
+			color: var(--text-color-1);
 
 			border-radius: inherit;
 			border: none;

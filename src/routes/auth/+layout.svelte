@@ -61,7 +61,7 @@
 				font-weight: 100;
 
 				width: 100%;
-				color: var(--text-color);
+				color: var(--text-color-1);
 				text-align: center;
 			}
 		}
@@ -98,7 +98,7 @@
 
 				min-width: 480px;
 
-				box-shadow: 0px 0px 1.5rem var(--shadow-color);
+				box-shadow: 0px 0px 1.5rem var(--shadow-color-1);
 				background-color: var(--background);
 
 				border-radius: 2rem;

@@ -3,7 +3,8 @@
 :root {
 	font-size: 8px;
 
-	--text-color: #ddd;
+	--text-color-1: #dddddd;
+	--text-color-2: #c0c0c0;
 	--background: #222;
 	/* --background: #1a1a1a; */
 
@@ -15,7 +16,9 @@
 	--secondary-color: #531b53;
 	/* --secondary-color: #2b0d2b; */
 	--error-color: #f08080;
-	--shadow-color: #0000004d;
+	--success-color: #90ee90;
+	--warning-color: #ffd700;
+	--shadow-color-1: #0000004d;
 }
 
 * {
@@ -41,7 +44,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
 	transition: background-color 99999s ease-in-out 0s;
-	-webkit-text-fill-color: var(--text-color) !important;
+	-webkit-text-fill-color: var(--text-color-1) !important;
 }
 
 @keyframes shake-x {

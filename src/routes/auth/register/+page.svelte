@@ -9,6 +9,7 @@
 	import { fade } from 'svelte/transition';
 
 	import { createFormContext } from '$lib/contexts/FormErrors';
+	import { showToast } from '$lib/stores/toast';
 	import { HttpRequest } from '$lib/http';
 	import { goto } from '$app/navigation';
 
@@ -26,7 +27,7 @@
 		request.setResource('user').setMethod('POST').setBody(data);
 
 		request.addResponse(null, (error) => {
-			alert('error');
+			showToast('error', 'Server Error', 'A server error has occurred. Please try again later.');
 			console.log(error);
 		});
 
@@ -37,7 +38,7 @@
 		});
 
 		request.addResponse(201, (_) => {
-			alert('success');
+			showToast('success', 'Welcome!', 'Your account has been created successfully!');
 			goto('/auth/login');
 		});
 
