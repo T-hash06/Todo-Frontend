@@ -19,7 +19,7 @@
 </script>
 
 <div id="toast-container" class:active={$toastStore.active} class={$toastStore.status}>
-	<button class="wrapper" on:click={hideToast}>
+	<button class="wrapper" on:click={hideToast} aria-label="toast notification">
 		<span class="icon">
 			<iconify-icon {icon} />
 		</span>

@@ -17,6 +17,14 @@ export type SessionPayload = {
 	exp: number;
 };
 
+export type Todo = {
+	id: string;
+	title: string;
+	description: string;
+	priority: number;
+	done: boolean;
+};
+
 export class HttpRequest {
 	private method: HttpMethod = 'GET';
 	private endpoint = '';
@@ -81,6 +89,7 @@ export class HttpRequest {
 				headers: {
 					'Content-Type': 'application/json',
 					'Access-Control-Allow-Origin': '*',
+					'X-Api-Key': 'test',
 					...this.headers
 				}
 			});

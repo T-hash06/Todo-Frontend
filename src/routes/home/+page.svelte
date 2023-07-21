@@ -1,7 +1,10 @@
 <script lang="ts">
-	export let data;
-
-	console.log(data.session.username);
 </script>
 
-<h1>hello new logged user {data.session.username}!</h1>
+<div id="home-page" class="page-container" />
+
+<style lang="scss">
+	// #home-page {
+	// 	background-color: #f0f0f0;
+	// }
+</style>

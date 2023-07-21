@@ -66,3 +66,24 @@ input:-webkit-autofill:active {
 		transform: translateX(0);
 	}
 }
+
+@keyframes spawn-scale {
+	0% {
+		transform: scale(1);
+		opacity: 1;
+	}
+	20% {
+		transform: scale(0);
+		opacity: 0;
+	}
+	50% {
+		transform: scale(0);
+		opacity: 1;
+	}
+	70% {
+		transform: scale(1.2);
+	}
+	100% {
+		transform: scale(1);
+	}
+}

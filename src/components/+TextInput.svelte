@@ -104,6 +104,7 @@
 	<input
 		id="input-{name}"
 		class="input"
+		autocapitalize="off"
 		use:setType
 		bind:value
 		on:change={checkValidity}
