@@ -1,7 +1,7 @@
 import { HttpRequest, type SessionPayload } from '$lib/util/http.js';
 import { redirect } from '@sveltejs/kit';
 
-export async function load({ cookies }) {
+export async function load({ cookies, fetch }) {
 	const sessionToken = cookies.get('session-token');
 
 	if (sessionToken === undefined) {
@@ -29,7 +29,7 @@ export async function load({ cookies }) {
 		session = payload;
 	});
 
-	await request.execute();
+	await request.execute(fetch);
 
 	return { session };
 }

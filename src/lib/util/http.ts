@@ -1,7 +1,5 @@
 import type { HttpMethod } from '@sveltejs/kit';
 
-import { PUBLIC_BACKEND_ENDPOINT } from '$env/static/public';
-
 export type HttpCode = -1 | 200 | 201 | 204 | 400 | 401 | 403 | 404 | 409 | 500;
 
 export type HttpResponse<T> = {
@@ -27,7 +25,7 @@ export type Todo = {
 
 export class HttpRequest {
 	private method: HttpMethod = 'GET';
-	private endpoint = '';
+	private endpoint = '/api';
 	private resource = '';
 	private headers = {} as Record<string, string>;
 
@@ -77,19 +75,15 @@ export class HttpRequest {
 		this.cases[code] = fallback as ResponseFallback<unknown>;
 	}
 
-	public async execute(): Promise<void> {
+	public async execute(fetcher: typeof fetch = fetch): Promise<void> {
 		if (this.hasDefaultFallback === false) throw new Error('Default fallback is not defined');
 
-		if (this.endpoint === '') this.endpoint = PUBLIC_BACKEND_ENDPOINT;
-
 		try {
-			const response = await fetch(`${this.endpoint}/${this.resource}`, {
+			const response = await fetcher(`${this.endpoint}/${this.resource}`, {
 				method: this.method,
 				body: JSON.stringify(this.body),
 				headers: {
 					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*',
-					'X-Api-Key': 'test',
 					...this.headers
 				}
 			});
