@@ -18,7 +18,11 @@
 	--error-color: #f08080;
 	--success-color: #90ee90;
 	--warning-color: #ffd700;
-	--shadow-color-1: #0000004d;
+
+	--shadow-color-1: rgba(0, 0, 0, 0.25);
+	--shadow-color-2: rgba(0, 0, 0, 0.5);
+	--shadow-color-3: rgba(0, 0, 0, 0.75);
+	--shadow-color-4: rgba(0, 0, 0, 1);
 }
 
 * {

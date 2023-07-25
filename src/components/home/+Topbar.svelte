@@ -24,7 +24,7 @@
 <style lang="scss">
 	$toggler-height: 4rem;
 
-	$topbar-height: 10rem;
+	$topbar-height: var(--topbar-height);
 
 	#topbar {
 		$margin: calc(($topbar-height - $toggler-height) / 2);
@@ -62,6 +62,7 @@
 			outline: none;
 
 			background-color: transparent;
+			cursor: pointer;
 
 			.decorator {
 				display: block;
@@ -117,6 +118,15 @@
 
 				// TODO:
 				// opacity: 0;
+			}
+		}
+	}
+
+	@media (min-width: 1000px) {
+		#topbar {
+			.sidebar-toggler {
+				opacity: 0;
+				pointer-events: none;
 			}
 		}
 	}

@@ -16,4 +16,19 @@
 </div>
 
 <style lang="scss">
+	#home-layout {
+		--topbar-height: 10rem;
+		--sidebar-width: 52rem;
+
+		display: grid;
+		grid-template-rows: var(--topbar-height) auto;
+
+		height: 100%;
+	}
+
+	@media (min-width: 1000px) {
+		#home-layout {
+			grid-template-columns: var(--sidebar-width) auto;
+		}
+	}
 </style>

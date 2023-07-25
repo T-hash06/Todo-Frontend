@@ -56,26 +56,34 @@
 
 <style lang="scss">
 	$margin-left: 6rem;
-	$spacing: 4rem;
 
 	$link-height: 6rem;
+	$sidebar-width: var(--sidebar-width);
 
 	#sidebar {
+		--spacing: clamp(4rem, 10vw, 7rem);
+
 		display: grid;
 		grid-template-rows: min-content min-content auto;
 
 		position: fixed;
 		top: 0;
-		left: -100svw;
+		left: calc(-1 * min(100vw, $sidebar-width));
 
 		width: 100svw;
 		height: 100svh;
 
+		max-width: $sidebar-width;
+
 		backdrop-filter: blur(1rem);
 
 		transition-duration: calc(var(--std-transition-time) * 2);
+
+		box-shadow: none;
+
 		&.active {
 			left: 0;
+			box-shadow: 0px 0px 10px var(--shadow-color-1);
 		}
 
 		.head-container {
@@ -97,7 +105,7 @@
 				border-radius: 50%;
 				border: 4px solid var(--primary-color);
 				margin-left: $margin-left;
-				margin-top: $spacing * 1.5;
+				margin-top: calc(var(--spacing) * 1.5);
 
 				overflow: hidden;
 
@@ -119,7 +127,7 @@
 				justify-content: center;
 				align-items: center;
 
-				margin-top: $spacing * 2;
+				margin-top: calc(var(--spacing) * 2);
 
 				width: 5rem;
 				aspect-ratio: 1/1;
@@ -131,6 +139,8 @@
 				color: var(--primary-color);
 				border: 2px solid var(--primary-color);
 				font-size: 3.5rem;
+
+				cursor: pointer;
 			}
 		}
 
@@ -143,7 +153,7 @@
 			margin-left: $margin-left;
 			letter-spacing: 2px;
 
-			margin-top: $spacing;
+			margin-top: var(--spacing);
 		}
 
 		.links-container {
@@ -151,7 +161,7 @@
 			flex-direction: column;
 
 			margin-left: $margin-left;
-			margin-top: $spacing;
+			margin-top: var(--spacing);
 			list-style: none;
 
 			gap: 2rem;
@@ -192,6 +202,19 @@
 						color: var(--primary-color);
 					}
 				}
+			}
+		}
+	}
+
+	@media (min-width: 1000px) {
+		#sidebar {
+			position: initial;
+			grid-row: 1/3;
+
+			box-shadow: 0px 0px 10px var(--shadow-color-1);
+
+			.head-container .sidebar-toggler {
+				display: none;
 			}
 		}
 	}
