@@ -20,8 +20,10 @@
 		--topbar-height: 10rem;
 		--sidebar-width: 52rem;
 
+		--home-margin-left: 3rem;
+
 		display: grid;
-		grid-template-rows: var(--topbar-height) auto;
+		grid-template-rows: 10rem auto;
 
 		height: 100%;
 	}

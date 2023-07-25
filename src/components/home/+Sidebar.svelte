@@ -75,11 +75,11 @@
 
 		max-width: $sidebar-width;
 
-		backdrop-filter: blur(1rem);
-
+		background-color: var(--background);
 		transition-duration: calc(var(--std-transition-time) * 2);
 
 		box-shadow: none;
+		z-index: 2;
 
 		&.active {
 			left: 0;

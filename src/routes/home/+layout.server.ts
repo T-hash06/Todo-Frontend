@@ -1,5 +1,4 @@
 import { HttpRequest, type SessionPayload } from '$lib/util/http.js';
-import { createSessionStore } from '$lib/stores/session.js';
 import { redirect } from '@sveltejs/kit';
 
 export async function load({ cookies, fetch }) {

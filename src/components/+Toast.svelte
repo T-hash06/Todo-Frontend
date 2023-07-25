@@ -49,6 +49,8 @@
 
 		transition-duration: var(--std-transition-time);
 
+		z-index: 100;
+
 		& > * {
 			pointer-events: auto;
 		}

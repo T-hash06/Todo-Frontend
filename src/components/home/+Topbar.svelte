@@ -53,7 +53,7 @@
 			align-content: space-around;
 			flex-wrap: wrap;
 
-			margin-left: $margin;
+			margin-left: var(--home-margin-left);
 
 			height: $toggler-height;
 			width: 4rem;

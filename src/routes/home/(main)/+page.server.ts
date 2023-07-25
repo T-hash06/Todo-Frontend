@@ -1,6 +1,12 @@
 import { HttpRequest, type Todo } from '$lib/util/http';
 import { redirect } from '@sveltejs/kit';
 
+function getRandomPrefix() {
+	const prefixes = ["What's up", 'Hey', 'Greetings', 'Hi there', 'Hello'];
+
+	return prefixes[Math.floor(Math.random() * prefixes.length)];
+}
+
 export async function load({ cookies, fetch }) {
 	const sessionToken = cookies.get('session-token');
 
@@ -31,5 +37,5 @@ export async function load({ cookies, fetch }) {
 
 	await request.execute(fetch);
 
-	return { todos };
+	return { todos, prefix: getRandomPrefix() };
 }

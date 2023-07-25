@@ -9,6 +9,8 @@
 	import Button from '$components/+Button.svelte';
 	import TextInput from '$components/+TextInput.svelte';
 
+	import cookies from 'js-cookie';
+
 	const { setError } = createFormContext({ username: '', password: '' });
 
 	function submit(event: SubmitEvent) {
@@ -33,7 +35,7 @@
 		});
 
 		request.addResponse<string>(201, (text) => {
-			document.cookie = `session-token=${text};path=/home`;
+			cookies.set('session-token', text);
 			showToast('success', 'Logged in', 'Logged in successfully!');
 			goto('/home');
 		});
