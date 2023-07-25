@@ -11,6 +11,8 @@ export type ResponseFallback<T> = (payload: T) => void;
 
 export type SessionPayload = {
 	username: string;
+	name: string;
+	email: string;
 	iat: number;
 	exp: number;
 };

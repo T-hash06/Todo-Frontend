@@ -1,13 +1,69 @@
 <script lang="ts">
+	import { sessionStore } from '$lib/stores/session';
 	import { active } from '$lib/stores/sidebar';
+	import { page } from '$app/stores';
+
+	function toggle() {
+		$active = !$active;
+	}
+
+	function checkActive(path: string) {
+		return $page.url.pathname === path;
+	}
 </script>
 
 <aside id="sidebar" class:active={$active}>
-	<h1>todo</h1>
+	<div class="head-container">
+		<div class="image-container">
+			<span class="default-profile">
+				<iconify-icon icon="solar:bolt-outline" />
+			</span>
+		</div>
+		<button class="sidebar-toggler" on:click={toggle}>
+			<iconify-icon icon="solar:double-alt-arrow-left-line-duotone" />
+		</button>
+	</div>
+
+	<h2 class="title">{$sessionStore.name}</h2>
+
+	<ul class="links-container">
+		<li>
+			<a class="link" href="/home" class:active={checkActive('/home')}>
+				<span class="icon"><iconify-icon icon="solar:home-smile-bold" /></span>
+				<span class="text">Home</span>
+			</a>
+		</li>
+		<li>
+			<a class="link" href="/home" class:active={checkActive('/calendar')}>
+				<span class="icon"><iconify-icon icon="solar:calendar-bold" /></span>
+				<span class="text">Calendar</span>
+			</a>
+		</li>
+		<li>
+			<a class="link" href="/home" class:active={checkActive('/analytics')}>
+				<span class="icon"><iconify-icon icon="solar:pie-chart-2-bold" /></span>
+				<span class="text">Analytics</span>
+			</a>
+		</li>
+		<li>
+			<a class="link" href="/home" class:active={checkActive('/settings')}>
+				<span class="icon"><iconify-icon icon="solar:settings-bold" /></span>
+				<span class="text">Settings</span>
+			</a>
+		</li>
+	</ul>
 </aside>
 
 <style lang="scss">
+	$margin-left: 6rem;
+	$spacing: 4rem;
+
+	$link-height: 6rem;
+
 	#sidebar {
+		display: grid;
+		grid-template-rows: min-content min-content auto;
+
 		position: fixed;
 		top: 0;
 		left: -100svw;
@@ -18,9 +74,125 @@
 		backdrop-filter: blur(1rem);
 
 		transition-duration: calc(var(--std-transition-time) * 2);
-
 		&.active {
 			left: 0;
+		}
+
+		.head-container {
+			display: grid;
+			grid-template-columns: 2fr 1fr;
+
+			.image-container {
+				display: flex;
+
+				justify-self: left;
+				align-self: center;
+
+				justify-content: center;
+				align-items: center;
+
+				height: 16rem;
+				aspect-ratio: 1/1;
+
+				border-radius: 50%;
+				border: 4px solid var(--primary-color);
+				margin-left: $margin-left;
+				margin-top: $spacing * 1.5;
+
+				overflow: hidden;
+
+				.default-profile {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+
+					width: 50%;
+					height: 50%;
+
+					font-size: 8rem;
+					color: var(--primary-color);
+				}
+			}
+
+			.sidebar-toggler {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+
+				margin-top: $spacing * 2;
+
+				width: 5rem;
+				aspect-ratio: 1/1;
+				overflow: hidden;
+
+				border-radius: 50%;
+				background-color: transparent;
+
+				color: var(--primary-color);
+				border: 2px solid var(--primary-color);
+				font-size: 3.5rem;
+			}
+		}
+
+		.title {
+			color: var(--text-color-2);
+			font-size: 5rem;
+
+			width: 60%;
+
+			margin-left: $margin-left;
+			letter-spacing: 2px;
+
+			margin-top: $spacing;
+		}
+
+		.links-container {
+			display: flex;
+			flex-direction: column;
+
+			margin-left: $margin-left;
+			margin-top: $spacing;
+			list-style: none;
+
+			gap: 2rem;
+
+			.link {
+				display: grid;
+				grid-template-columns: $link-height + 1rem auto;
+				height: $link-height;
+				width: calc(100% - $margin-left);
+
+				font-size: 2.5rem;
+				font-weight: 100;
+				text-decoration: none;
+
+				border-radius: 1rem;
+
+				color: var(--text-color-2);
+
+				.icon {
+					display: flex;
+					align-items: center;
+
+					font-size: 3.5rem;
+					color: var(--disabled-color);
+				}
+
+				.text {
+					text-decoration: none;
+					align-self: center;
+
+					letter-spacing: 0.6px;
+				}
+
+				&.active {
+					color: var(--primary-color);
+
+					.icon {
+						color: var(--primary-color);
+					}
+				}
+			}
 		}
 	}
 </style>
