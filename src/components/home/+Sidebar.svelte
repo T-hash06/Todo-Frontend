@@ -145,7 +145,7 @@
 		}
 
 		.title {
-			color: var(--text-color-2);
+			color: var(--text-color-1);
 			font-size: 5rem;
 
 			width: 60%;

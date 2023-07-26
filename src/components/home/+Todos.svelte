@@ -100,7 +100,7 @@
 					font-size: 2rem;
 					font-weight: 400;
 
-					color: var(--text-color-2);
+					color: var(--text-color-1);
 
 					transition-duration: inherit;
 

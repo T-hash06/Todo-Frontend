@@ -67,7 +67,7 @@
 		z-index: 2;
 
 		.title {
-			color: var(--text-color-2);
+			color: var(--text-color-1);
 			font-weight: 400;
 			font-size: 2.5rem;
 			letter-spacing: 0.6px;
