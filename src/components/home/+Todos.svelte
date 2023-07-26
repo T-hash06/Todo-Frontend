@@ -62,6 +62,7 @@
 
 				height: $todo-height;
 				width: 100%;
+				max-width: 52rem;
 				border: none;
 
 				transition-duration: var(--std-transition-time);

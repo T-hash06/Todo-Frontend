@@ -3,10 +3,11 @@
 	export { classes as class };
 
 	export let type: 'primary' | 'secondary' = 'primary';
+	export let role: 'button' | 'submit' | 'reset' = 'submit';
 	export let href: string = '';
 </script>
 
-<button class="button-container {type} {classes}">
+<button class="button-container {type} {classes}" on:click type={role}>
 	<svelte:element this={href !== '' ? 'a' : 'span'} class="text" {href}><slot /></svelte:element>
 </button>
 

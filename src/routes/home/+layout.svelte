@@ -23,9 +23,11 @@
 		--home-margin-left: 3rem;
 
 		display: grid;
-		grid-template-rows: 10rem auto;
+		grid-template-rows: 10rem 1fr;
 
 		height: 100%;
+
+		overflow: hidden;
 	}
 
 	@media (min-width: 1000px) {

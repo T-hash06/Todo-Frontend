@@ -7,6 +7,7 @@
 
 	export let placeholder: string = '';
 	export let type: 'text' | 'password' | 'email' = 'text';
+	export let focus: boolean = false;
 	export let value: string = '';
 	export let icon: string = '';
 	export let pattern: string | null = null;
@@ -33,6 +34,10 @@
 		node.type = type;
 
 		inputElement = node;
+
+		if (focus) {
+			node.focus();
+		}
 	}
 
 	function checkValidity(event: Event) {
