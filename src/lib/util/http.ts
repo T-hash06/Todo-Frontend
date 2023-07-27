@@ -21,9 +21,14 @@ export type Todo = {
 	id: number;
 	title: string;
 	label: string;
-	description: string;
 	priority: number;
 	done: boolean;
+};
+
+export type CreateTodoData = {
+	title: string;
+	label: string;
+	priority: number;
 };
 
 export class HttpRequest {

@@ -5,6 +5,7 @@
 
 <div class="create-form">
 	<TextInput name="title" placeholder="Title" focus />
+	<TextInput name="label" placeholder="Label" />
 	<ColorInput name="color" />
 </div>
 

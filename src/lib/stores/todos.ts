@@ -1,4 +1,4 @@
-import { HttpRequest, type Todo } from '$lib/util/http';
+import { HttpRequest, type Todo, type CreateTodoData } from '$lib/util/http';
 import { showToast } from '$lib/stores/toast';
 
 import { writable } from 'svelte/store';
@@ -6,7 +6,56 @@ import { goto } from '$app/navigation';
 
 import cookies from 'js-cookie';
 
+let temporalId = 0;
+
 export const todosStore = writable<Todo[]>([] as Todo[]);
+
+export function createTodo({ title, label, priority }: CreateTodoData) {
+	const localId = --temporalId;
+	let backTodos = [] as Todo[];
+
+	todosStore.update((todos) => {
+		backTodos = JSON.parse(JSON.stringify(todos));
+
+		todos.push({ id: localId, title, label: label.toLowerCase(), priority, done: false });
+		return todos;
+	});
+
+	const request = new HttpRequest();
+	const token = cookies.get('session-token') ?? '';
+
+	request
+		.setResource('todo')
+		.setBearer(token)
+		.setMethod('POST')
+		.setBody({ title, label, priority });
+
+	request.addResponse(null, (error) => {
+		console.log(error);
+
+		showToast('error', 'Error', 'Error while creating todo');
+
+		todosStore.set(backTodos);
+	});
+
+	request.addResponse(401, () => {
+		showToast('warning', 'Expired session', 'You need to login again');
+
+		todosStore.set([]);
+
+		goto('/auth/login');
+	});
+
+	request.addResponse<string>(201, (id) => {
+		todosStore.update((todos) => {
+			const todo = todos.find((todo) => todo.id === localId);
+			if (todo !== undefined) todo.id = parseInt(id);
+			return todos;
+		});
+	});
+
+	request.execute();
+}
 
 export function toggleTodoCompleted(id: number) {
 	let backTodos = [] as Todo[];
@@ -16,7 +65,7 @@ export function toggleTodoCompleted(id: number) {
 		backTodos = JSON.parse(JSON.stringify(todos));
 
 		const todo = todos.find((todo) => todo.id === id);
-		if (todo) {
+		if (todo !== undefined) {
 			todo.done = !todo.done;
 			changedValue = todo.done;
 		}
@@ -42,6 +91,8 @@ export function toggleTodoCompleted(id: number) {
 
 	request.addResponse(401, () => {
 		showToast('warning', 'Expired session', 'You need to login again');
+
+		todosStore.set([]);
 
 		goto('/auth/login');
 	});

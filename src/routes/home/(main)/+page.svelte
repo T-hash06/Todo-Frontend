@@ -4,13 +4,23 @@
 	import Todos from '$components/home/+Todos.svelte';
 	import Dialog from '$components/+Dialog.svelte';
 
-	import { todosStore } from '$lib/stores/todos.js';
+	import { todosStore, createTodo } from '$lib/stores/todos.js';
 
 	export let data;
 	let active = false;
 
 	const name = data.session.name.split(' ').at(0);
 	todosStore.set(data.todos);
+
+	function handleCreateTodo(event: Event) {
+		const form = event.target as HTMLFormElement;
+		const formData = new FormData(form);
+
+		const urlSearchParams = new URLSearchParams(formData as any);
+		const { title, label, priority } = Object.fromEntries(urlSearchParams.entries());
+
+		createTodo({ title, label, priority: 1 });
+	}
 </script>
 
 <div id="home-page" class="page-container">
@@ -20,7 +30,7 @@
 	<Todos todos={$todosStore} />
 
 	{#if active}
-		<Dialog bind:active sendText="create" title="create new task">
+		<Dialog bind:active sendText="create" title="create new task" on:submit={handleCreateTodo}>
 			<CreateForm />
 		</Dialog>
 	{/if}

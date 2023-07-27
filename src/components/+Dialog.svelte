@@ -23,6 +23,7 @@
 	class="dialog-container"
 	transition:fade={{ duration: 200 }}
 	on:click={close}
+	on:submit|preventDefault={close}
 	on:keydown={handleKeyPress}
 	role="none"
 >
@@ -30,7 +31,7 @@
 		class="wrapper"
 		on:click|stopPropagation
 		on:keydown={handleKeyPress}
-		on:submit|preventDefault={close}
+		on:submit|preventDefault
 		role="none"
 	>
 		<h3 class="title">{title}</h3>
@@ -92,7 +93,7 @@
 			background-color: var(--background);
 
 			border-radius: 1rem;
-			box-shadow: 0px 0px 8px var(--shadow-color-2);
+			box-shadow: 0px 0px 10px var(--shadow-color-1);
 
 			gap: $spacing;
 
