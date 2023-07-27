@@ -25,7 +25,7 @@
 		</Dialog>
 	{/if}
 
-	<button class="create-todo" on:click={() => (active = true)}>
+	<button class="create-todo" aria-label="create todo" on:click={() => (active = true)}>
 		<p class="text">create</p>
 		<span class="decorator" />
 		<span class="decorator" />

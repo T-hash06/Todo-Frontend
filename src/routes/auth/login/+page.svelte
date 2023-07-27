@@ -56,7 +56,7 @@
 		</div>
 
 		<div class="buttons-section section">
-			<Button class="button" type="secondary" href="register">Sign Up</Button>
+			<Button class="button" type="secondary" href="register" role="button">Sign Up</Button>
 			<Button class="button">Login</Button>
 		</div>
 	</form>

@@ -7,18 +7,21 @@
 </script>
 
 <header id="topbar">
-	<button class="sidebar-toggler" on:click={toggle}>
+	<button class="sidebar-toggler" aria-label="sidebar toggler" on:click={toggle}>
 		<span class="decorator" />
 		<span class="decorator" />
 	</button>
 
 	<div class="search-section">
 		<input type="text" class="search-input" id="main-search-input" />
-		<label class="icon search" for="main-search-input"
-			><iconify-icon icon="solar:minimalistic-magnifer-broken" />
+		<label class="icon search" for="main-search-input" tabindex="-1">
+			<iconify-icon icon="solar:minimalistic-magnifer-outline" />
+			<p class="label-text">search bar</p>
 		</label>
 	</div>
-	<button class="icon bell"><iconify-icon icon="solar:bell-broken" /></button>
+	<button class="icon bell" aria-label="notification button">
+		<iconify-icon icon="solar:bell-outline" />
+	</button>
 </header>
 
 <style lang="scss">
@@ -78,6 +81,7 @@
 		.icon {
 			display: flex;
 			align-items: center;
+			align-self: center;
 			border: none;
 			outline: none;
 
@@ -85,9 +89,10 @@
 			font-size: 3.5rem;
 
 			width: min-content;
-			height: 100%;
+			height: min-content;
 
 			color: var(--primary-color);
+			cursor: pointer;
 
 			&.bell {
 				margin-right: $margin;
@@ -99,6 +104,7 @@
 		}
 
 		.search-section {
+			position: relative;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
@@ -118,6 +124,11 @@
 
 				// TODO:
 				// opacity: 0;
+			}
+			.label-text {
+				position: absolute;
+				pointer-events: none;
+				opacity: 0;
 			}
 		}
 	}

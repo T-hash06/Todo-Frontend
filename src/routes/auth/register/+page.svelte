@@ -46,6 +46,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Register | Todo App</title>
+</svelte:head>
+
 <div id="register-page" in:fade={{ duration: 600 }}>
 	<form class="form" method="post" on:submit|preventDefault={submit}>
 		<div class="section">
@@ -61,7 +65,7 @@
 			/>
 		</div>
 		<div class="section buttons-section">
-			<Button href="login" type="secondary">Login</Button>
+			<Button href="login" type="secondary" role="button">Login</Button>
 			<Button>Sign up</Button>
 		</div>
 	</form>
