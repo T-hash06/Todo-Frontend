@@ -1,7 +1,8 @@
 <script lang="ts">
 	import CreateForm from '$components/home/+CreateForm.svelte';
-	import Dialog from '$components/+Dialog.svelte';
+	import Labels from '$components/home/+Labels.svelte';
 	import Todos from '$components/home/+Todos.svelte';
+	import Dialog from '$components/+Dialog.svelte';
 
 	import { todosStore } from '$lib/stores/todos.js';
 
@@ -15,6 +16,7 @@
 <div id="home-page" class="page-container">
 	<h2 class="greeting">{data.prefix}, {name}!</h2>
 
+	<Labels />
 	<Todos todos={$todosStore} />
 
 	{#if active}
@@ -39,6 +41,20 @@
 		height: fit-content;
 
 		justify-self: center;
+		overflow-y: auto;
+
+		:global(.section-title) {
+			font-size: 2.5rem;
+			font-weight: 200;
+
+			text-transform: capitalize;
+
+			color: var(--disabled-color);
+		}
+
+		:global(.section-content) {
+			gap: 3rem;
+		}
 
 		.greeting {
 			font-size: 4.7rem;
@@ -95,6 +111,8 @@
 
 	@media screen and (min-width: 740px) {
 		#home-page {
+			--home-margin-left: 9rem;
+
 			.create-todo {
 				display: flex;
 				justify-content: left;

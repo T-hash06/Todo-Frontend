@@ -12,7 +12,9 @@
 <div id="home-layout">
 	<Sidebar />
 	<Topbar />
-	<slot />
+	<div class="slot-container">
+		<slot />
+	</div>
 </div>
 
 <style lang="scss">
@@ -23,11 +25,23 @@
 		--home-margin-left: 3rem;
 
 		display: grid;
-		grid-template-rows: 10rem 1fr;
+		grid-template-rows: var(--topbar-height) auto;
 
 		height: 100%;
 
 		overflow: hidden;
+
+		.slot-container {
+			width: 100%;
+			height: 100%;
+
+			overflow-y: hidden;
+			overflow: auto;
+
+			display: flex;
+
+			justify-content: center;
+		}
 	}
 
 	@media (min-width: 1000px) {

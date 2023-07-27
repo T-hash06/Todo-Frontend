@@ -72,8 +72,8 @@
 			grid-template-columns: 8rem 1fr;
 			grid-template-rows: 6rem auto;
 
-			backdrop-filter: blur(1rem);
-			background-color: rgba(65, 65, 65, 0.5);
+			backdrop-filter: contrast(60%);
+			background-color: transparent;
 
 			box-shadow: 0px 10px 10px var(--shadow-color-1);
 

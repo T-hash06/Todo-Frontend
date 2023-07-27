@@ -20,6 +20,7 @@ export type SessionPayload = {
 export type Todo = {
 	id: number;
 	title: string;
+	label: string;
 	description: string;
 	priority: number;
 	done: boolean;

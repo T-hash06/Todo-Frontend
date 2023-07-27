@@ -6,9 +6,9 @@
 </script>
 
 <section id="todos-section">
-	<h3 class="title">today's tasks</h3>
+	<h3 class="section-title">today's tasks</h3>
 
-	<ul class="todos-list">
+	<ul class="todos-list section-content">
 		{#each todos as todo}
 			<li>
 				<button
@@ -29,25 +29,16 @@
 
 <style lang="scss">
 	#todos-section {
-		margin-top: 4rem;
+		margin-top: 3rem;
 		width: 100%;
-
-		.title {
-			font-size: 2.5rem;
-			font-weight: 200;
-
-			text-transform: capitalize;
-
-			color: var(--disabled-color);
-		}
 
 		.todos-list {
 			display: flex;
 			flex-direction: column;
 			list-style: none;
 
-			gap: 3rem;
 			margin-top: 4rem;
+			padding-bottom: 12rem;
 
 			.todo-item {
 				$todo-height: 8rem;
@@ -62,7 +53,6 @@
 
 				height: $todo-height;
 				width: 100%;
-				max-width: 52rem;
 				border: none;
 
 				transition-duration: var(--std-transition-time);
