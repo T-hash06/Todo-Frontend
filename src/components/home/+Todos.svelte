@@ -20,7 +20,6 @@
 						<iconify-icon icon="pajamas:check" class="icon" />
 					</span>
 					<h4 class="todo-title">{todo.title}</h4>
-					<!-- <p class="todo-description">{todo.description}</p> -->
 				</button>
 			</li>
 		{/each}
@@ -33,8 +32,9 @@
 		width: 100%;
 
 		.todos-list {
-			display: flex;
-			flex-direction: column;
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(42rem, 1fr));
+
 			list-style: none;
 
 			margin-top: 4rem;
@@ -133,6 +133,14 @@
 						}
 					}
 				}
+			}
+		}
+	}
+
+	@media screen and (max-width: 468px) {
+		#todos-section {
+			.todos-list {
+				grid-template-columns: 1fr;
 			}
 		}
 	}

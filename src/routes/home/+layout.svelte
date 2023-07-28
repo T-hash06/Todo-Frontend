@@ -46,6 +46,7 @@
 
 	@media (min-width: 1000px) {
 		#home-layout {
+			--sidebar-width: 42rem;
 			grid-template-columns: var(--sidebar-width) auto;
 		}
 	}
