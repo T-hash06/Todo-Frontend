@@ -36,7 +36,6 @@
 
 		request.addResponse<string>(201, (text) => {
 			cookies.set('session-token', text);
-			showToast('success', 'Logged in', 'Logged in successfully!');
 			goto('/home');
 		});
 

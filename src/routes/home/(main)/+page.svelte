@@ -17,7 +17,7 @@
 		const formData = new FormData(form);
 
 		const urlSearchParams = new URLSearchParams(formData as any);
-		const { title, label, priority } = Object.fromEntries(urlSearchParams.entries());
+		const { title, label } = Object.fromEntries(urlSearchParams.entries());
 
 		createTodo({ title, label, priority: 1 });
 	}
@@ -35,7 +35,12 @@
 		</Dialog>
 	{/if}
 
-	<button class="create-todo" aria-label="create todo" on:click={() => (active = true)}>
+	<button
+		class="create-todo"
+		class:wink={$todosStore.length === 0 && !active}
+		aria-label="create todo"
+		on:click={() => (active = true)}
+	>
 		<p class="text">create</p>
 		<span class="decorator" />
 		<span class="decorator" />
@@ -83,7 +88,7 @@
 			height: $create-todo-size;
 
 			border-radius: 50%;
-			box-shadow: 0px 10px 10px 0px var(--shadow-color-1);
+			box-shadow: 0px 6px 10px var(--shadow-color-1);
 			border: none;
 			cursor: pointer;
 
@@ -133,6 +138,12 @@
 				right: 7rem;
 				bottom: 7rem;
 
+				box-shadow: 10px 10px 10px var(--shadow-color-1);
+
+				&.wink {
+					animation: wink 01s ease-in-out infinite;
+				}
+
 				.text {
 					display: flex;
 					font-size: 2.2rem;
@@ -147,6 +158,22 @@
 					right: calc($create-todo-size / 2);
 				}
 			}
+		}
+	}
+
+	@keyframes wink {
+		0% {
+			transform: scale(1);
+		}
+
+		50% {
+			transform: scale(1.05);
+			filter: brightness(1.1);
+			box-shadow: 12px 12px 15px var(--shadow-color-1);
+		}
+
+		100% {
+			transform: scale(1);
 		}
 	}
 </style>

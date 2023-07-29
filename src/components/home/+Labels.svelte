@@ -49,16 +49,24 @@
 					<div class="progress-bar" style="--progress: {percentage}%" />
 				</button>
 			</li>
+		{:else}
+			<li class="fallback" />
 		{/each}
 	</ul>
 </section>
 
 <style lang="scss">
+	$label-height: 12rem;
+
 	.labels-section {
 		margin-top: 4rem;
 
 		width: 100%;
 		overflow: hidden;
+
+		.fallback {
+			height: $label-height;
+		}
 
 		.list-container {
 			display: flex;
@@ -85,7 +93,7 @@
 				grid-template-rows: repeat(2, min-content);
 
 				width: 19rem;
-				height: 12rem;
+				height: $label-height;
 
 				background-color: var(--background-2);
 				box-shadow: 5px 5px 10px var(--shadow-color-1);
@@ -113,6 +121,10 @@
 					font-size: 2.3rem;
 					font-weight: 400;
 					text-transform: capitalize;
+
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					overflow: hidden;
 
 					text-align: left;
 					letter-spacing: 0.5px;

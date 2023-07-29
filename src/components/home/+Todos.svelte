@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { toggleTodoCompleted, filterStore, deleteTodo } from '$lib/stores/todos';
+	import { fade } from 'svelte/transition';
 	import type { Todo } from '$lib/util/http';
 
 	export let todos: Todo[];
@@ -39,6 +40,12 @@
 					</span>
 				</button>
 			</li>
+		{:else}
+			<li class="fallback" in:fade>
+				<iconify-icon icon="solar:adhesive-plaster-bold-duotone" class="icon" />
+				<h2 class="title">Still empty</h2>
+				<p class="text">Nothing here yet… Start creating!</p>
+			</li>
 		{/each}
 	</ul>
 </section>
@@ -50,12 +57,46 @@
 
 		.todos-list {
 			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(42rem, 1fr));
+			grid-template-columns: repeat(auto-fill, minmax(42rem, 1fr));
 
 			list-style: none;
 
 			margin-top: 4rem;
 			padding-bottom: 12rem;
+
+			.fallback {
+				width: 100%;
+				height: min-content;
+
+				grid-column: 1 / -1;
+
+				display: grid;
+				grid-template-rows: 10rem repeat(2, min-content);
+				place-items: center;
+				gap: 2rem;
+
+				margin-top: 2rem;
+
+				.icon {
+					font-size: 10rem;
+					color: var(--primary-color);
+				}
+
+				.title {
+					color: var(--text-color-1);
+					letter-spacing: 1px;
+					font-size: 4rem;
+					font-weight: 500;
+					text-transform: capitalize;
+
+					margin-top: 2rem;
+				}
+
+				.text {
+					font-size: 2rem;
+					color: var(--disabled-color);
+				}
+			}
 
 			.todo-item {
 				$todo-height: 8rem;
