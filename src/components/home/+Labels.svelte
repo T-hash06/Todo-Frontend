@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { todosStore } from '$lib/stores/todos';
+	import { todosStore, filterStore } from '$lib/stores/todos';
 
 	let labels: Record<string, { total: number; done: number }> = {};
 
@@ -17,6 +17,14 @@
 
 		labels = { ...categories };
 	}
+
+	function setFilter(label: string) {
+		if ($filterStore === label) {
+			$filterStore = '';
+			return;
+		}
+		$filterStore = label;
+	}
 </script>
 
 <section class="labels-section">
@@ -28,7 +36,12 @@
 			{@const percentage = (done / total) * 100}
 
 			<li>
-				<button class="label-container" class:complete={pendants === 0}>
+				<button
+					class="label-container"
+					class:complete={pendants === 0}
+					class:filter-selected={$filterStore === name}
+					on:click={() => setFilter(name)}
+				>
 					<iconify-icon icon="solar:medal-star-circle-bold" class="medal-icon" />
 					<span class="todos-count">{pendants} pendants</span>
 					<h4 class="label-title">{name}</h4>
@@ -70,14 +83,14 @@
 				display: grid;
 				grid-template-rows: repeat(2, min-content);
 
-				width: 18rem;
+				width: 19rem;
 				height: 12rem;
 
 				backdrop-filter: contrast(80%);
 				background-color: transparent;
 				box-shadow: 5px 5px 10px var(--shadow-color-1);
 
-				border: none;
+				border: 2px solid transparent;
 				border-radius: 1.5rem;
 				cursor: pointer;
 
@@ -85,6 +98,10 @@
 				padding: 1.5rem;
 
 				transition-duration: var(--std-transition-time);
+
+				&.filter-selected {
+					border-color: var(--primary-color);
+				}
 
 				.todos-count {
 					color: var(--disabled-color);

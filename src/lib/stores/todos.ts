@@ -9,6 +9,7 @@ import cookies from 'js-cookie';
 let temporalId = 0;
 
 export const todosStore = writable<Todo[]>([] as Todo[]);
+export const filterStore = writable<string>('');
 
 export function createTodo({ title, label, priority }: CreateTodoData) {
 	const localId = --temporalId;

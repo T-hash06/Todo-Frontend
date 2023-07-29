@@ -1,15 +1,22 @@
 <script lang="ts">
-	import { toggleTodoCompleted } from '$lib/stores/todos';
+	import { toggleTodoCompleted, filterStore } from '$lib/stores/todos';
 	import type { Todo } from '$lib/util/http';
 
 	export let todos: Todo[];
+
+	$: sortedTodos = () => {
+		const matching = todos.filter((t) => t.label === $filterStore);
+		const notMatching = todos.filter((t) => t.label !== $filterStore);
+
+		return [...matching, ...notMatching];
+	};
 </script>
 
 <section id="todos-section">
 	<h3 class="section-title">today's tasks</h3>
 
 	<ul class="todos-list section-content">
-		{#each todos as todo}
+		{#each sortedTodos() as todo (todo.id)}
 			<li>
 				<button
 					class="todo-item"
