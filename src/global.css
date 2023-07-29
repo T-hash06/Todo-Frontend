@@ -5,7 +5,8 @@
 
 	--text-color-1: #dddddd;
 	--text-color-2: #c0c0c0;
-	--background: #222222;
+	--background-1: #222222;
+	--background-2: #353535;
 	/* --background: #1a1a1a; */
 
 	--std-height: 6rem;
@@ -42,12 +43,12 @@
 		border-radius: 2rem;
 	}
 	&::-webkit-scrollbar-track {
-		background: var(--background);
+		background: var(--background-1);
 	}
 }
 
 body {
-	background: var(--background);
+	background: var(--background-1);
 
 	height: 100vh;
 	height: 100svh;

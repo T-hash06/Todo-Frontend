@@ -75,7 +75,7 @@
 
 		max-width: $sidebar-width;
 
-		background-color: var(--background);
+		background-color: var(--background-1);
 		transition-duration: calc(var(--std-transition-time) * 2);
 
 		box-shadow: none;

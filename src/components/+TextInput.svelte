@@ -136,7 +136,7 @@
 
 <style lang="scss">
 	.text-input-container {
-		--border-slice-color: var(--background);
+		--border-slice-color: var(--background-1);
 
 		position: relative;
 

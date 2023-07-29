@@ -102,3 +102,40 @@ export function toggleTodoCompleted(id: number) {
 
 	request.execute();
 }
+
+export function deleteTodo(id: number) {
+	let backTodos = [] as Todo[];
+
+	todosStore.update((todos) => {
+		backTodos = JSON.parse(JSON.stringify(todos));
+
+		const index = todos.findIndex((todo) => todo.id === id);
+		if (index !== -1) todos.splice(index, 1);
+		return todos;
+	});
+
+	const request = new HttpRequest();
+	const token = cookies.get('session-token') ?? '';
+
+	request.setResource(`todo/${id}`).setBearer(token).setMethod('DELETE');
+
+	request.addResponse(null, (error) => {
+		console.log(error);
+
+		showToast('error', 'Error', 'Error while deleting todo');
+
+		todosStore.set(backTodos);
+	});
+
+	request.addResponse(401, () => {
+		showToast('warning', 'Expired session', 'You need to login again');
+
+		todosStore.set([]);
+
+		goto('/auth/login');
+	});
+
+	request.addResponse(200, () => null);
+
+	request.execute();
+}

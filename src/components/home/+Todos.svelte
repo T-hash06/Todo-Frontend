@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { toggleTodoCompleted, filterStore } from '$lib/stores/todos';
+	import { toggleTodoCompleted, filterStore, deleteTodo } from '$lib/stores/todos';
 	import type { Todo } from '$lib/util/http';
 
 	export let todos: Todo[];
@@ -23,10 +23,20 @@
 					class:done={todo.done}
 					on:click={() => toggleTodoCompleted(todo.id)}
 				>
-					<span class="checkbox">
+					<span class="checkbox icon-container">
 						<iconify-icon icon="pajamas:check" class="icon" />
 					</span>
 					<h4 class="todo-title">{todo.title}</h4>
+					<span
+						class="delete icon-container"
+						aria-label="delete todo"
+						on:click|stopPropagation={() => deleteTodo(todo.id)}
+						on:keypress|stopPropagation={() => deleteTodo(todo.id)}
+						role="button"
+						tabindex="0"
+					>
+						<iconify-icon icon="solar:trash-bin-2-bold" class="icon" />
+					</span>
 				</button>
 			</li>
 		{/each}
@@ -51,12 +61,11 @@
 				$todo-height: 8rem;
 
 				display: grid;
-				grid-template-columns: $todo-height auto;
+				grid-template-columns: $todo-height auto $todo-height;
 
 				border-radius: 1rem;
 
-				backdrop-filter: contrast(80%);
-				background-color: transparent;
+				background-color: var(--background-2);
 
 				height: $todo-height;
 				width: 100%;
@@ -66,15 +75,12 @@
 
 				cursor: pointer;
 
-				.checkbox {
+				.icon-container {
 					place-self: center;
 
 					display: flex;
 					justify-content: center;
 					align-items: center;
-
-					border-radius: 50%;
-					border: 2px solid var(--primary-color);
 
 					width: 3.5rem;
 					aspect-ratio: 1/1;
@@ -82,11 +88,33 @@
 					transition-duration: inherit;
 
 					font-size: 3rem;
+					cursor: pointer;
+				}
+
+				.checkbox {
+					border-radius: 50%;
+					border: 2px solid var(--primary-color);
 
 					.icon {
 						color: var(--secondary-color);
 						transition-duration: inherit;
 						opacity: 0;
+					}
+				}
+
+				.delete {
+					color: var(--disabled-color);
+					background-color: transparent;
+					border: none;
+					outline: none;
+					width: fit-content;
+
+					.icon {
+						pointer-events: none;
+					}
+
+					&:hover {
+						color: var(--error-color);
 					}
 				}
 
@@ -100,6 +128,7 @@
 					color: var(--text-color-1);
 
 					transition-duration: inherit;
+					user-select: none;
 
 					&::first-letter {
 						text-transform: capitalize;

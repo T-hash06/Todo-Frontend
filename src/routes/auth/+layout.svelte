@@ -99,7 +99,7 @@
 				min-width: 480px;
 
 				box-shadow: 0px 0px 1.5rem var(--shadow-color-1);
-				background-color: var(--background);
+				background-color: var(--background-1);
 
 				border-radius: 2rem;
 			}

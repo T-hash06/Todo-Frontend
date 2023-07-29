@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { todosStore, filterStore } from '$lib/stores/todos';
+	import { fade } from 'svelte/transition';
 
 	let labels: Record<string, { total: number; done: number }> = {};
 
@@ -35,7 +36,7 @@
 			{@const pendants = total - done}
 			{@const percentage = (done / total) * 100}
 
-			<li>
+			<li transition:fade>
 				<button
 					class="label-container"
 					class:complete={pendants === 0}
@@ -86,8 +87,7 @@
 				width: 19rem;
 				height: 12rem;
 
-				backdrop-filter: contrast(80%);
-				background-color: transparent;
+				background-color: var(--background-2);
 				box-shadow: 5px 5px 10px var(--shadow-color-1);
 
 				border: 2px solid transparent;

@@ -51,7 +51,6 @@
 	$spacing: 3rem;
 
 	.dialog-container {
-		// background-color: color-mix(in srgb, var(--background), transparent 20%);
 		backdrop-filter: blur(3px);
 
 		display: grid;
@@ -90,7 +89,7 @@
 
 			padding: $spacing;
 
-			background-color: var(--background);
+			background-color: var(--background-1);
 
 			border-radius: 1rem;
 			box-shadow: 0px 0px 10px var(--shadow-color-1);
