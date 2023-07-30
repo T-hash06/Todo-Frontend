@@ -59,6 +59,8 @@
 	$label-height: 12rem;
 
 	.labels-section {
+		--label-color: var(--primary-color);
+
 		margin-top: 4rem;
 
 		width: 100%;
@@ -108,7 +110,7 @@
 				transition-duration: var(--std-transition-time);
 
 				&.filter-selected {
-					border-color: var(--primary-color);
+					border-color: var(--label-color);
 				}
 
 				.todos-count {
@@ -157,7 +159,7 @@
 						height: 100%;
 
 						border-radius: inherit;
-						background-color: var(--primary-color);
+						background-color: var(--label-color);
 					}
 				}
 
@@ -167,7 +169,7 @@
 					top: 1rem;
 
 					font-size: 4rem;
-					color: var(--primary-color);
+					color: var(--label-color);
 
 					opacity: 0;
 					transition-duration: inherit;

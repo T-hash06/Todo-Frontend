@@ -2,7 +2,7 @@ import { HttpRequest, type Todo } from '$lib/util/http';
 import { redirect } from '@sveltejs/kit';
 
 function getRandomPrefix() {
-	const prefixes = ["What's up", 'Hey', 'Greetings', 'Hi there', 'Hello'];
+	const prefixes = ["What's up", 'Hey', 'Greetings', 'Hi there', 'Hello', 'Hiya', 'Howdy'];
 
 	return prefixes[Math.floor(Math.random() * prefixes.length)];
 }

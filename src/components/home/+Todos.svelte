@@ -52,6 +52,8 @@
 
 <style lang="scss">
 	#todos-section {
+		--label-color: var(--primary-color);
+
 		margin-top: 3rem;
 		width: 100%;
 
@@ -134,7 +136,7 @@
 
 				.checkbox {
 					border-radius: 50%;
-					border: 2px solid var(--primary-color);
+					border: 2px solid var(--label-color);
 
 					.icon {
 						color: var(--secondary-color);
@@ -194,7 +196,7 @@
 
 				&.done {
 					.checkbox {
-						background-color: var(--primary-color);
+						background-color: var(--label-color);
 
 						.icon {
 							opacity: 1;

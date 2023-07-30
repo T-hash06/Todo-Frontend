@@ -26,6 +26,21 @@
 	--shadow-color-4: rgba(0, 0, 0, 1);
 }
 
+@media (prefers-color-scheme: light) {
+	:root {
+		--text-color-1: #2e2e2e;
+		--text-color-2: #424242;
+
+		--background-1: #e9e9e9;
+		--background-2: #cecece;
+
+		--primary-color: #ef7272;
+		--secondary-color: #353235;
+
+		--success-color: #60f160;
+	}
+}
+
 * {
 	margin: 0;
 	padding: 0;
