@@ -3,7 +3,12 @@
 	import { fade } from 'svelte/transition';
 	import type { Todo } from '$lib/util/http';
 
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
+
 	export let todos: Todo[];
+
+	const schema = getContext('schema') as Writable<Record<string, string>>;
 
 	$: sortedTodos = () => {
 		const matching = todos.filter((t) => t.label === $filterStore);
@@ -18,7 +23,7 @@
 
 	<ul class="todos-list section-content">
 		{#each sortedTodos() as todo (todo.id)}
-			<li>
+			<li style="--label-color: {$schema[todo.label]};">
 				<button
 					class="todo-item"
 					class:done={todo.done}
@@ -139,7 +144,7 @@
 					border: 2px solid var(--label-color);
 
 					.icon {
-						color: var(--secondary-color);
+						color: var(--background-1);
 						transition-duration: inherit;
 						opacity: 0;
 					}

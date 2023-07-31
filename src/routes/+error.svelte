@@ -1,6 +1,4 @@
 <script lang="ts">
-	// import { page } from '$app/stores';
-
 	import Button from '$components/+Button.svelte';
 </script>
 

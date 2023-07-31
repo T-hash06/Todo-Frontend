@@ -1,4 +1,5 @@
 import { HttpRequest, type Todo, type CreateTodoData } from '$lib/util/http';
+import { getSequentialColor } from '$lib/util/color';
 import { showToast } from '$lib/stores/toast';
 
 import { writable } from 'svelte/store';
@@ -8,6 +9,22 @@ import cookies from 'js-cookie';
 
 let temporalId = 0;
 
+function calculateSchema(todos: Todo[]) {
+	const labelSet = new Set<string>();
+
+	todos.forEach((todo) => labelSet.add(todo.label));
+
+	const labels = Array.from(labelSet);
+
+	const colors = {} as Record<string, string>;
+
+	labels.forEach((label, index) => {
+		colors[label] = getSequentialColor(index);
+	});
+	return colors;
+}
+
+export const colorStore = writable<Record<string, string>>();
 export const todosStore = writable<Todo[]>([] as Todo[]);
 export const filterStore = writable<string>('');
 
@@ -139,3 +156,7 @@ export function deleteTodo(id: number) {
 
 	request.execute();
 }
+
+todosStore.subscribe((todos) => {
+	colorStore.set(calculateSchema(todos));
+});

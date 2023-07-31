@@ -1,28 +1,21 @@
-<script lang="ts" context="module">
-	function getRandomColor() {
-		const hue = Math.floor(Math.random() * 360);
-		const saturation = 50;
-		const lightness = 68;
-
-		const color = `hsl(${hue}, ${saturation}%, ${lightness}%)`;
-
-		return color;
-	}
-</script>
-
 <script lang="ts">
-	export let value: string = getRandomColor();
+	import { getRandomColor } from '$lib/util/color';
+
+	export let value: string = '';
 	export let name: string;
+	export let disabled: boolean = false;
 	let element: HTMLButtonElement;
 
 	function init(node: HTMLButtonElement) {
-		value = getRandomColor();
+		if (value === '') value = getRandomColor();
 		element = node;
 
 		element.style.setProperty('--picked-color', value);
 	}
 
 	function randomValue() {
+		if (disabled) return;
+
 		value = getRandomColor();
 		element.style.setProperty('--picked-color', value);
 	}

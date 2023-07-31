@@ -2,7 +2,12 @@
 	import { todosStore, filterStore } from '$lib/stores/todos';
 	import { fade } from 'svelte/transition';
 
+	import type { Writable } from 'svelte/store';
+	import { getContext } from 'svelte';
+
 	let labels: Record<string, { total: number; done: number }> = {};
+
+	const schema = getContext('schema') as Writable<Record<string, string>>;
 
 	$: {
 		const categories: typeof labels = {};
@@ -32,11 +37,11 @@
 	<h3 class="section-title">your workspaces</h3>
 
 	<ul class="list-container section-content">
-		{#each Object.entries(labels) as [name, { total, done }]}
+		{#each Object.entries(labels) as [name, { total, done }], index}
 			{@const pendants = total - done}
 			{@const percentage = (done / total) * 100}
 
-			<li transition:fade>
+			<li style="--label-color: {$schema[name]};" transition:fade>
 				<button
 					class="label-container"
 					class:complete={pendants === 0}
@@ -180,6 +185,19 @@
 						opacity: 1;
 						animation: spawn 0.3s backwards;
 					}
+				}
+			}
+		}
+	}
+
+	@media screen and (min-width: 1024px) {
+		.labels-section {
+			.list-container {
+				-ms-overflow-style: initial;
+				scrollbar-width: initial;
+
+				&::-webkit-scrollbar {
+					display: initial;
 				}
 			}
 		}

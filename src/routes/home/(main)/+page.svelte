@@ -4,13 +4,15 @@
 	import Todos from '$components/home/+Todos.svelte';
 	import Dialog from '$components/+Dialog.svelte';
 
-	import { todosStore, createTodo } from '$lib/stores/todos.js';
+	import { todosStore, createTodo, colorStore } from '$lib/stores/todos.js';
+	import { setContext } from 'svelte';
 
 	export let data;
 	let active = false;
 
 	const name = data.session.name.split(' ').at(0);
 	todosStore.set(data.todos);
+	colorStore.set(data.labelColors);
 
 	function handleCreateTodo(event: Event) {
 		const form = event.target as HTMLFormElement;
@@ -21,6 +23,8 @@
 
 		createTodo({ title, label, priority: 1 });
 	}
+
+	setContext('schema', colorStore);
 </script>
 
 <div id="home-page" class="page-container">
