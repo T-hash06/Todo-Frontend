@@ -50,18 +50,18 @@
 	font-family: 'Outfit', 'Poppins', sans-serif;
 
 	-webkit-tap-highlight-color: transparent;
+}
 
-	&::-webkit-scrollbar {
-		width: 5px;
-		height: 5px;
-	}
-	&::-webkit-scrollbar-thumb {
-		background: var(--disabled-color);
-		border-radius: 2rem;
-	}
-	&::-webkit-scrollbar-track {
-		background: var(--background-1);
-	}
+*::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+}
+*::-webkit-scrollbar-thumb {
+	background: var(--disabled-color);
+	border-radius: 2rem;
+}
+*::-webkit-scrollbar-track {
+	background: var(--background-1);
 }
 
 body {
