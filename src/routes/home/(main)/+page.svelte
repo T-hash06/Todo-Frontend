@@ -27,6 +27,10 @@
 	setContext('schema', colorStore);
 </script>
 
+<svelte:head>
+	<title>Home</title>
+</svelte:head>
+
 <div id="home-page" class="page-container">
 	<h2 class="greeting">{data.prefix}, {name}!</h2>
 
@@ -63,10 +67,11 @@
 		overflow-y: auto;
 
 		:global(.section-title) {
-			font-size: 2.5rem;
-			font-weight: 200;
+			font-size: 2rem;
+			font-weight: 400;
 
 			text-transform: capitalize;
+			letter-spacing: 0.4px;
 
 			color: var(--disabled-color);
 		}
@@ -131,6 +136,10 @@
 	@media screen and (min-width: 740px) {
 		#home-page {
 			--home-margin-left: 9rem;
+
+			:global(.section-title) {
+				font-size: 2.3rem;
+			}
 
 			.create-todo {
 				display: flex;

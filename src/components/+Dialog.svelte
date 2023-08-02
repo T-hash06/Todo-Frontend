@@ -51,15 +51,16 @@
 	$spacing: 3rem;
 
 	.dialog-container {
-		backdrop-filter: blur(3px);
+		backdrop-filter: blur(5px);
 
 		display: grid;
+		grid-template-rows: repeat(3, 1fr);
 		place-items: center;
 
 		position: fixed;
 
 		width: 100svw;
-		height: 100svh;
+		height: 100%;
 
 		top: 0;
 		left: 0;
@@ -95,11 +96,20 @@
 			box-shadow: 0px 0px 10px var(--shadow-color-1);
 
 			gap: $spacing;
+			grid-row: 1/3;
 
 			.buttons {
 				display: flex;
 				justify-content: flex-end;
 				gap: $spacing;
+			}
+		}
+	}
+
+	@media screen and (min-width: 1024px) {
+		.dialog-container {
+			.wrapper {
+				grid-row: 1/-1;
 			}
 		}
 	}

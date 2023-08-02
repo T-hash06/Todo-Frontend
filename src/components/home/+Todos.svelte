@@ -122,6 +122,7 @@
 				transition-duration: var(--std-transition-time);
 
 				cursor: pointer;
+				overflow: hidden;
 
 				.icon-container {
 					place-self: center;
@@ -144,7 +145,7 @@
 					border: 2px solid var(--label-color);
 
 					.icon {
-						color: var(--background-1);
+						color: var(--background-2);
 						transition-duration: inherit;
 						opacity: 0;
 					}
@@ -172,8 +173,15 @@
 					place-self: center start;
 					font-size: 2rem;
 					font-weight: 400;
+					text-align: left;
+
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
 
 					color: var(--text-color-1);
+
+					max-width: 100%;
 
 					transition-duration: inherit;
 					user-select: none;

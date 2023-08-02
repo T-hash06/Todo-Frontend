@@ -19,7 +19,7 @@
 				<iconify-icon icon="solar:bolt-outline" />
 			</span>
 		</div>
-		<button class="sidebar-toggler" on:click={toggle}>
+		<button class="sidebar-toggler" on:click={toggle} aria-label="sidebar toggler">
 			<iconify-icon icon="solar:double-alt-arrow-left-line-duotone" />
 		</button>
 	</div>
@@ -197,6 +197,7 @@
 
 				&.active {
 					color: var(--primary-color);
+					font-weight: 400;
 
 					.icon {
 						color: var(--primary-color);
@@ -215,6 +216,11 @@
 
 			.head-container .sidebar-toggler {
 				display: none;
+			}
+
+			.links-container .link .text {
+				letter-spacing: 1px;
+				font-size: 2.3rem;
 			}
 		}
 	}

@@ -37,9 +37,16 @@
 		--primary-color: #6738be;
 		--secondary-color: #ecbeec;
 
-		--disabled-color: #777;
+		--disabled-color: #666666;
 
+		--error-color: #f03c3c;
 		--success-color: #60f160;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	:root {
+		font-size: 7px;
 	}
 }
 
