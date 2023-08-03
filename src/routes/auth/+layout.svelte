@@ -1,5 +1,9 @@
 <script lang="ts">
+	import { deleteSessionStore } from '$lib/stores/session.js';
+
 	export let data;
+
+	deleteSessionStore();
 </script>
 
 <div id="auth-layout" class="page-container">

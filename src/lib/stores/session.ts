@@ -14,3 +14,8 @@ export function createSessionStore(data: SessionPayload) {
 
 	sessionStore.set(data);
 }
+
+export function deleteSessionStore() {
+	sessionStore.set({} as SessionPayload);
+	created = false;
+}

@@ -20,7 +20,7 @@
 <style lang="scss">
 	#home-layout {
 		--topbar-height: 10rem;
-		--sidebar-width: 52rem;
+		--sidebar-width: 55rem;
 
 		--home-margin-left: 3rem;
 
@@ -41,6 +41,12 @@
 			display: flex;
 
 			justify-content: center;
+		}
+	}
+
+	@media (min-width: 385px) {
+		#home-layout {
+			--sidebar-width: 48rem;
 		}
 	}
 

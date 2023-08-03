@@ -13,7 +13,7 @@ export function showToast(status: ToastStatus, title: string, message: string) {
 	toastStore.set({ status, title, message, active: true });
 
 	clearTimeout(timeoutId);
-	timeoutId = setTimeout(hideToast, 4000);
+	timeoutId = setTimeout(hideToast, 7000);
 }
 
 export function hideToast() {

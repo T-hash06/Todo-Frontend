@@ -94,6 +94,19 @@
 
 			cursor: pointer;
 
+			&::after {
+				content: '';
+				position: absolute;
+
+				bottom: 0;
+				left: 0;
+
+				width: 100%;
+				height: 0.25rem;
+
+				background-color: var(--status-color);
+			}
+
 			.icon {
 				position: relative;
 				grid-row: 1/3;
@@ -143,12 +156,25 @@
 				top: 0%;
 				opacity: 1;
 
+				&::after {
+					animation: progress 6.9s linear;
+				}
+
 				&:active {
 					transition-duration: 100ms;
 					box-shadow: 0px 0px 2px var(--shadow-color-1);
 					transform: scale(0.97);
 				}
 			}
+		}
+	}
+
+	@keyframes progress {
+		from {
+			width: 0%;
+		}
+		to {
+			width: 100%;
 		}
 	}
 </style>

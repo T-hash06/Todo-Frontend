@@ -1,7 +1,9 @@
 <script lang="ts">
-	import { sessionStore } from '$lib/stores/session';
+	import { deleteSessionStore, sessionStore } from '$lib/stores/session';
 	import { active } from '$lib/stores/sidebar';
 	import { page } from '$app/stores';
+
+	import cookies from 'js-cookie';
 
 	function toggle() {
 		$active = !$active;
@@ -9,6 +11,11 @@
 
 	function checkActive(path: string) {
 		return $page.url.pathname === path;
+	}
+
+	function logout() {
+		cookies.remove('session-token');
+		deleteSessionStore();
 	}
 </script>
 
@@ -49,6 +56,12 @@
 			<a class="link" href="/home" class:active={checkActive('/settings')}>
 				<span class="icon"><iconify-icon icon="solar:settings-bold" /></span>
 				<span class="text">Settings</span>
+			</a>
+		</li>
+		<li>
+			<a class="link" href="/auth/login" on:click={logout}>
+				<span class="icon"><iconify-icon icon="solar:logout-2-bold" /></span>
+				<span class="text">Logout</span>
 			</a>
 		</li>
 	</ul>
@@ -177,6 +190,7 @@
 				text-decoration: none;
 
 				border-radius: 1rem;
+				transition-duration: var(--std-transition-time);
 
 				color: var(--text-color-2);
 
@@ -186,6 +200,8 @@
 
 					font-size: 3.5rem;
 					color: var(--disabled-color);
+
+					transition-duration: inherit;
 				}
 
 				.text {
@@ -218,9 +234,19 @@
 				display: none;
 			}
 
-			.links-container .link .text {
-				letter-spacing: 1px;
-				font-size: 2.3rem;
+			.links-container .link {
+				&:hover {
+					color: var(--primary-color);
+
+					.icon {
+						color: var(--primary-color);
+					}
+				}
+
+				.text {
+					letter-spacing: 1px;
+					font-size: 2.3rem;
+				}
 			}
 		}
 	}
